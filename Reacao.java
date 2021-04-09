@@ -14,40 +14,40 @@ public class Reacao{
     this.y = y;
   }
   public void adicionarA(int a){
-    this.quantA += a;
+    quantA += a;
   }
   public void adicionarB(int b){
-    this.quantB += b;
+    quantB += b;
   }
   public void agitar(){
-      this.i = this.x;
+      i = x;
       contA = 0;
       contB = 0;
-     while( i< this.quantA + 1){
+     while( i< quantA + 1){
        contA++;
-       i +=this.x;
+       i +=x;
      }
-      this.j = this.y;
+      j = y;
      while( j< quantB + 1 ){
        contB++;
        
-       j +=this.y;
+       j +=y;
      }
      if(contA > 0  && contB > 0){
        if(contA > contB){
          quantC += contB;
-         quantA -= contB * this.x;
-         quantB -= contB * this.y;
+         quantA -= contB * x;
+         quantB -= contB * y;
        }
        else if(contB > contA){
          quantC += contA;
-         quantA -= contA * this.x;
-         quantB -= contA * this.y;
+         quantA -= contA * x;
+         quantB -= contA * y;
        }
        else{
          quantC += contA;
-         quantA -= contA * this.x;
-         quantB -= contA * this.y;
+         quantA -= contA * x;
+         quantB -= contA * y;
        }
      }else{
        quantC += 0;
