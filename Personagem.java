@@ -1,25 +1,101 @@
-public class Personagem(){
+public class Personagem{
 
   private int maxMana;
-  private int baseMana1;
-  private int baseMana2;
-  private int baseMana3;
-  private int baseMana4;
-  private int baseMana5;
+  private int[] baseMana = new int[4];
+  private int[] nivelHabilidade = new int[4];
   private int manaPersonagem;
   private int xp;
+  private int nivelPersonagem = 1;
+  private int contMelhorias = 1;
+  private int calculoMana;
 
-  public Personagem(int maxMana, baseMana1, baseMana2, baseMana3, baseMana4, baseMana5){
+  public Personagem(int maxMana, int baseMana1, int baseMana2, int baseMana3, int baseMana4){
     this.manaPersonagem = maxMana;
     this.maxMana = maxMana;
-    this.baseMana1 = baseMana1;
-    this.baseMana2 = baseMana2;
-    this.baseMana3 = baseMana3;
-    this.baseMana4 = baseMana4;
-    this.baseMana5 = baseMana5;
+    this.baseMana[0] = baseMana1;
+    this.baseMana[1] = baseMana2;
+    this.baseMana[2] = baseMana3;
+    this.baseMana[3] = baseMana4;
   }
   public void adicionarXP(int xp){
-
+    this.xp += xp;
+    while(this.xp > 99){
+      if(nivelPersonagem < 25){
+        nivelPersonagem++;
+        contMelhorias++;
+      }
+      
+      this.xp -=100;
+    }
+    
   }
+  public int getNivel(){
+    return nivelPersonagem;
+  }
+  public boolean melhorarHabilidade(int poder){
+    if(poder == 3){
+      if(nivelPersonagem > 5){
+        contMelhorias--;
+        nivelHabilidade[poder]++;
+        return true;
+      }else{
+        return false;
+      }
+    }
+    else if(poder == 2){
+      if(nivelHabilidade[poder] < 3){
+        if(contMelhorias > 0){
+          contMelhorias--;
+          nivelHabilidade[poder]++;
+          return true;
+        }
+        else{
+          return false;
+        }
+      }
+      else{
+        return false;
+      }
+    }
+    else{
+      if(nivelHabilidade[poder] < 4){
+        if(contMelhorias > 0){
+          contMelhorias--;
+          nivelHabilidade[poder]++;
+          return true;
+        }
+        else{
+          return false;
+        }
+      }
+      else{
+        return false;
+      }
+    }
+    
+  }
+  public boolean usarHabilidade(int habilidade){
+    if(nivelHabilidade[habilidade] == 0){
+      return false;
+    }
+    else{
+      calculoMana = baseMana[habilidade] * nivelHabilidade[habilidade];
+      if(calculoMana < manaPersonagem + 1){
+        manaPersonagem -= calculoMana;
+        return true;
+      }else{
+        return false;
+      }
+    }
+  }
+
+  public void consumirPocao(){
+    manaPersonagem += 350;
+    if(manaPersonagem > this.maxMana){
+      manaPersonagem = this.maxMana;
+    }
+    
+  }
+
 
 }
