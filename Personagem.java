@@ -35,15 +35,24 @@ public class Personagem{
   public boolean melhorarHabilidade(int poder){
     if(poder == 3){
       if(nivelPersonagem > 5){
-        contMelhorias--;
-        nivelHabilidade[poder]++;
-        return true;
+        if(nivelHabilidade[poder] < 3){
+          if(contMelhorias > 0){
+            contMelhorias--;
+            nivelHabilidade[poder]++;
+            return true;
+          }
+          else{
+            return false;
+          }
+        }else{
+          return false;
+        }
       }else{
         return false;
       }
     }
     else if(poder == 2){
-      if(nivelHabilidade[poder] < 3){
+      if(nivelHabilidade[poder] < 4){
         if(contMelhorias > 0){
           contMelhorias--;
           nivelHabilidade[poder]++;
